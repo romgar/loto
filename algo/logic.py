@@ -1,4 +1,4 @@
-from copy import copy
+
 import random
 
 
@@ -44,7 +44,6 @@ class LotoGrid(object):
             min_range = 1
         if not max_range:
             max_range = self.max_number - 1
-        import pdb; pdb.set_trace()
         random_number = random.randrange(min_range, max_range)
         for ind, lst in enumerate(self.lists):
             print 'List ', str(ind), ' - ', lst
@@ -71,6 +70,19 @@ class LotoGrid(object):
             grid += list.elements
         return grid
 
+    def get_grid_with_display(self):
+        grid = []
+        for list in self.lists:
+            grid.append(list.get_display_order())
+        return grid
+
+    def get_number_row_column(self, grid, row, column):
+        number = None
+        try:
+            number = grid[column][row]
+        except KeyError:
+            number = '-'
+        return number
 
 class list3(object):
 
@@ -84,11 +96,28 @@ class list3(object):
         else:
             self.elements.append(element)
 
+    def get_display_order(self):
+        elements_and_display = {}
+        display_used = []
+        for element in self.elements:
+            display = generate_number(display_used, 0, 3)
+            display_used.append(display)
+            elements_and_display[display] = element
+        return elements_and_display
+
     def __str__(self):
         return str(self.elements)
+
 
 if __name__ == '__main__':
 
     grid = LotoGrid()
     grid.generate_numbers()
-    print grid.get_grid()
+    disp_grid = grid.get_grid_with_display()
+
+    for row in range(0, 3):
+        row_str = ''
+        for col in range(0, 9):
+            row_str += str(grid.get_number_row_column(disp_grid, row, col)).ljust(2) + ' '
+        print row_str
+        print '\n'
