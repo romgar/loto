@@ -81,8 +81,20 @@ class LotoGrid(object):
         try:
             number = grid[column][row]
         except KeyError:
-            number = '-'
+            number = None
         return number
+
+    def export_for_display(self):
+        grid = self.get_grid_with_display()
+
+        matrix = []
+        for row in range(0, 3):
+            row_data = []
+            for col in range(0, 9):
+                row_data.append(self.get_number_row_column(grid, row, col))
+            matrix.append(row_data)
+        return matrix
+
 
 class list3(object):
 
@@ -104,6 +116,7 @@ class list3(object):
             display_used.append(display)
             elements_and_display[display] = element
         return elements_and_display
+
 
     def __str__(self):
         return str(self.elements)

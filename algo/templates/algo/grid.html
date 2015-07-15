@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+        .table {
+            width: 400px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .empty {
+            background: gray;
+        }
+    </style>
+</head>
+<body>
+    {% for grid in grids %}
+        <table class="table table-bordered">
+        {% for row in grid %}
+            <tr>
+                {% for column in row %}
+                <td {% if not column %}class="empty"{% endif %}>
+                    {% if column %}{{ column }}{% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+    {% endfor %}
+</body>
+</html>
