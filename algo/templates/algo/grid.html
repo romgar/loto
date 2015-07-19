@@ -6,14 +6,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <style>
         .table {
-            width: 400px;
-            font-size: 20px;
+            width: 700px;
+            font-size: 30px;
             font-weight: bold;
+            text-align: center;
         }
         .empty {
-            background: gray;
+            position: relative;
         }
+
+        td {
+            width: 50px;
+            padding: 17px 8px !important;
+        }
+
+  		.empty:before {
+             content: '';
+             position: absolute;
+             top:0;
+             left:0;
+             /* and here it is, the background color */
+             border: 38px gray solid;
+		}
+
     </style>
+   
 </head>
 <body>
     {% for grid in grids %}
